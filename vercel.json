@@ -1,7 +1,6 @@
 {
   "version": 2,
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/api/index" }
-  ],
-  "cleanUrls": true
+  "routes": [
+    { "src": "/(.*)", "dest": "/api/index.py" }
+  ]
 }
