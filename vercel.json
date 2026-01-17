@@ -1,9 +1,6 @@
-{
+﻿{
   "version": 2,
-  "functions": {
-    "index.py": { "runtime": "vercel-python@0.0.6" }
-  },
   "rewrites": [
-    { "source": "/(.*)", "destination": "index.py" }
+    { "source": "/(.*)", "destination": "/api/index.py" }
   ]
 }
