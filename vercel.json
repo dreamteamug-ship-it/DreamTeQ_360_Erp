@@ -1,5 +1,7 @@
-﻿{
+{
   "version": 2,
   "name": "dreamteq-360-erp",
-  "cleanUrls": true
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/index.py" }
+  ]
 }
