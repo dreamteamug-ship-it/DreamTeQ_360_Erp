@@ -23,21 +23,7 @@ function unlockVault() {
     if (key === 'Abim2026') { 
         document.getElementById('security-gate').style.display = 'none';
         localStorage.setItem('vault_session', 'active');
-        initSync();     // --- Auto-Lock Watchdog ---
-    let inactivityTimer;
-    function resetTimer() {
-        clearTimeout(inactivityTimer);
-        // Lock after 10 minutes (600,000 milliseconds)
-        inactivityTimer = setTimeout(lockVault, 600000); 
-    }
-    function lockVault() {
-        localStorage.removeItem('vault_session');
-        location.reload();
-    }
-    // Listen for any user activity to reset the timer
-    window.onmousemove = resetTimer;
-    window.onkeypress = resetTimer;
-    resetTimer(); // Initialize timer on load // Start the dashboard engine only after login
+        initSync(); // Start the dashboard engine only after login
     } else {
         document.getElementById('access-error').style.display = 'block';
         document.getElementById('vault-key').style.borderColor = '#ff4444';
@@ -94,7 +80,39 @@ window.onload = function() {
     .stat-card { border: 2px solid #000 !important; }
     #pulse { display: none; }
 }
-</style></body>
+</style><div id="ops-manual" style="position: fixed; top: 0; right: -400px; width: 350px; height: 100%; background: #0a0a0a; border-left: 1px solid #00ff88; z-index: 10000; padding: 30px; transition: right 0.5s ease; font-family: 'Courier New', monospace; box-shadow: -10px 0 30px rgba(0,0,0,0.5); overflow-y: auto;">
+    <button onclick="toggleManual()" style="background: transparent; border: 1px solid #ff4444; color: #ff4444; cursor: pointer; margin-bottom: 20px;">[ CLOSE MANUAL ]</button>
+    <h2 style="color: #00ff88; font-size: 1.2rem; border-bottom: 1px solid #222; padding-bottom: 10px;">OPERATIONS MANUAL v1.0</h2>
+    
+    <section style="margin-top: 20px;">
+        <h4 style="color: #00ff88;">01. ENGINE STATUS</h4>
+        <p style="color: #888; font-size: 0.8rem;">The "Sovereign Engine" pulses every 30 seconds. A Green pulse indicates a successful handshake with the Abim West Cluster Vault.</p>
+    </section>
+
+    <section style="margin-top: 20px;">
+        <h4 style="color: #00ff88;">02. GIS MAPPING</h4>
+        <p style="color: #888; font-size: 0.8rem;">The Abim West Cluster (highlighted) represents the geographic boundary of the $14.9M facility. Fill density correlates with verified farmer registration data.</p>
+    </section>
+
+    <section style="margin-top: 20px;">
+        <h4 style="color: #00ff88;">03. SECURITY</h4>
+        <p style="color: #888; font-size: 0.8rem;">The system features a 10-minute "Dead Man Switch." Inactivity will trigger an automatic Vault Lock to protect sensitive financial data.</p>
+    </section>
+
+    <section style="margin-top: 20px;">
+        <h4 style="color: #00ff88;">04. AUDIT EXPORT</h4>
+        <p style="color: #888; font-size: 0.8rem;">Use the "Generate Audit Report" button to produce a timestamped PDF for disbursement verification.</p>
+    </section>
+</div>
+
+<button id="manual-trigger" onclick="toggleManual()" style="position: fixed; bottom: 20px; right: 20px; background: rgba(0,255,136,0.1); border: 1px solid #00ff88; color: #00ff88; padding: 10px; cursor: pointer; z-index: 999; font-family: monospace;">[ ? HELP ]</button>
+
+<script>
+function toggleManual() {
+    const manual = document.getElementById('ops-manual');
+    manual.style.right = manual.style.right === '0px' ? '-400px' : '0px';
+}
+</script></body>
 </html>
 <style>
 @keyframes pulse {
