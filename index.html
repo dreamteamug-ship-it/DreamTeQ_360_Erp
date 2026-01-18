@@ -3,9 +3,9 @@
     <title>DREAMTEQ 360 ERP</title>
     <style>
         body { background:#050505; color:#d4af37; text-align:center; padding-top:100px; font-family:sans-serif; }
-        .count { font-size:120px; font-weight:bold; margin:20px; transition: all 0.5s ease; }
-        .pulse { color: #00ff00; font-size: 14px; letter-spacing: 2px; animation: blink 2s infinite; }
-        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+        .count { font-size:120px; font-weight:bold; margin:20px; text-shadow: 0 0 30px rgba(212,175,55,0.3); }
+        .pulse { color: #00ff00; font-size: 14px; letter-spacing: 2px; }
+        .timestamp { color: white; opacity: 0.5; font-size: 12px; margin-top: 10px; }
     </style>
 </head>
 <body>
@@ -13,6 +13,7 @@
     <p style="color:white;opacity:0.8;">SOVEREIGN ENGINE: ONLINE <span class="pulse">● LIVE SYNC</span></p>
     <div id="farmerCount" class="count">4,926</div>
     <p style="letter-spacing:3px;">VERIFIED FARMERS | ABIM WEST CLUSTER</p>
+    <div id="lastUpdate" class="timestamp">Initializing secure handshake...</div>
 
     <script>
         async function updatePulse() {
@@ -21,10 +22,14 @@
                 const data = await res.json();
                 if (data.count) {
                     document.getElementById("farmerCount").innerText = data.count.toLocaleString();
+                    const now = new Date();
+                    document.getElementById("lastUpdate").innerText = "Last Database Sync: " + now.toLocaleTimeString();
                 }
-            } catch (e) { console.log("Syncing with Abim West Cluster..."); }
+            } catch (e) { 
+                document.getElementById("lastUpdate").innerText = "Syncing with Abim West Cluster...";
+            }
         }
-        setInterval(updatePulse, 10000); // Check for new farmers every 10 seconds
+        setInterval(updatePulse, 10000); 
         updatePulse();
     </script>
 </body>
