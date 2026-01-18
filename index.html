@@ -40,3 +40,23 @@
     </script>
 </body>
 </html>
+<style>
+@keyframes pulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(0, 255, 136, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 136, 0); }
+}
+.ledger { margin-top: 30px; width: 100%; border-collapse: collapse; font-family: 'Courier New', monospace; color: #00ff88; font-size: 0.8rem; }
+.ledger th { border-bottom: 1px solid #333; padding: 10px; text-align: left; }
+.ledger td { padding: 10px; border-bottom: 1px solid #111; }
+</style>
+<div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+    <table class="ledger">
+        <thead>
+            <tr><th>TIMESTAMP</th><th>CLUSTER</th><th>EVENT</th></tr>
+        </thead>
+        <tbody id="ledger-body">
+            <tr><td>06:01:54</td><td>ABIM_WEST</td><td>VAULT_HANDSHAKE_INIT</td></tr>
+        </tbody>
+    </table>
+</div>
