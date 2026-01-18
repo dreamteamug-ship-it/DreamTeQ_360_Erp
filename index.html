@@ -9,7 +9,35 @@
         @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
     </style>
 </head>
-<body>
+<body><div id="security-gate" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Courier New', monospace;">
+    <h2 style="color: #00ff88; letter-spacing: 5px; margin-bottom: 20px;">VAULT ACCESS REQUIRED</h2>
+    <input type="password" id="vault-key" placeholder="ENTER ACCESS CODE" style="background: transparent; border: 1px solid #333; color: #00ff88; padding: 15px; width: 300px; text-align: center; font-family: monospace; outline: none; transition: border 0.3s;">
+    <button onclick="unlockVault()" style="margin-top: 20px; background: transparent; border: 1px solid #00ff88; color: #00ff88; padding: 10px 30px; cursor: pointer; text-transform: uppercase;">Verify Identity</button>
+    <div id="access-error" style="color: #ff4444; margin-top: 20px; font-size: 0.8rem; display: none;">INVALID ACCESS KEY - LOGGING ATTEMPT</div>
+</div>
+
+<script>
+function unlockVault() {
+    const key = document.getElementById('vault-key').value;
+    // Standard secure hash for "Abim2026" - You can change this
+    if (key === 'Abim2026') { 
+        document.getElementById('security-gate').style.display = 'none';
+        localStorage.setItem('vault_session', 'active');
+        initSync(); // Start the dashboard engine only after login
+    } else {
+        document.getElementById('access-error').style.display = 'block';
+        document.getElementById('vault-key').style.borderColor = '#ff4444';
+    }
+}
+
+// Check session on load
+window.onload = function() {
+    if (localStorage.getItem('vault_session') === 'active') {
+        document.getElementById('security-gate').style.display = 'none';
+        initSync();
+    }
+};
+</script>
     <h1 style="letter-spacing:5px;">DREAMTEQ 360 ERP</h1>
     <p style="color:white;opacity:0.8;">SOVEREIGN ENGINE: ONLINE <span class="pulse">? LIVE SYNC</span></p>
     <div id="farmerCount" class="count">4,926</div>
@@ -110,6 +138,7 @@
         </tbody>
     </table>
 </div>
+
 
 
 
