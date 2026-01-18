@@ -4,32 +4,38 @@
     <style>
         body { background:#050505; color:#d4af37; text-align:center; padding-top:100px; font-family:sans-serif; }
         .count { font-size:120px; font-weight:bold; margin:20px; text-shadow: 0 0 30px rgba(212,175,55,0.3); }
-        .pulse { color: #00ff00; font-size: 14px; letter-spacing: 2px; }
-        .timestamp { color: white; opacity: 0.5; font-size: 12px; margin-top: 10px; }
+        .pulse { color: #00ff00; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; animation: blink 2s infinite; }
+        .timestamp { color: white; opacity: 0.5; font-size: 12px; margin-top: 20px; font-family: monospace; }
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
     </style>
 </head>
 <body>
     <h1 style="letter-spacing:5px;">DREAMTEQ 360 ERP</h1>
     <p style="color:white;opacity:0.8;">SOVEREIGN ENGINE: ONLINE <span class="pulse">● LIVE SYNC</span></p>
     <div id="farmerCount" class="count">4,926</div>
-    <p style="letter-spacing:3px;">VERIFIED FARMERS | ABIM WEST CLUSTER</p>
-    <div id="lastUpdate" class="timestamp">Initializing secure handshake...</div>
+    <p style="letter-spacing:3px; opacity:0.7;">VERIFIED FARMERS | ABIM WEST CLUSTER</p>
+    <div id="lastUpdate" class="timestamp">ESTABLISHING SECURE HANDSHAKE...</div>
 
     <script>
         async function updatePulse() {
             try {
-                const res = await fetch("/api/index");
+                // We use the full path to avoid routing confusion
+                const res = await fetch("/api/index", { cache: "no-store" });
+                if (!res.ok) throw new Error("Server response was not OK");
                 const data = await res.json();
+                
                 if (data.count) {
                     document.getElementById("farmerCount").innerText = data.count.toLocaleString();
-                    const now = new Date();
-                    document.getElementById("lastUpdate").innerText = "Last Database Sync: " + now.toLocaleTimeString();
+                    document.getElementById("lastUpdate").innerText = "LAST DATABASE SYNC: " + new Date().toLocaleTimeString();
+                    document.getElementById("lastUpdate").style.color = "#00ff00";
                 }
             } catch (e) { 
-                document.getElementById("lastUpdate").innerText = "Syncing with Abim West Cluster...";
+                console.error("Sync Error:", e);
+                document.getElementById("lastUpdate").innerText = "RECONNECTING TO CLUSTER VAULT...";
+                document.getElementById("lastUpdate").style.color = "red";
             }
         }
-        setInterval(updatePulse, 10000); 
+        setInterval(updatePulse, 5000); 
         updatePulse();
     </script>
 </body>
