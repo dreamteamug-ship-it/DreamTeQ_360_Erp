@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "functions": {
-    "farmers.py": { "runtime": "@vercel/python" }
-  },
-  "rewrites": [
-    { "source": "/api/farmers", "destination": "/farmers.py" },
-    { "source": "/(.*)", "destination": "/index.html" }
+  "builds": [
+    { "src": "farmers.py", "use": "@vercel/python" },
+    { "src": "index.html", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/api/farmers", "dest": "farmers.py" },
+    { "src": "/(.*)", "dest": "/$1" }
   ]
 }
