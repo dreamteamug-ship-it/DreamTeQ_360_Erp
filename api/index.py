@@ -1,11 +1,6 @@
 ﻿from http.server import BaseHTTPRequestHandler
 import json
 import os
-from supabase import create_client
-
-# Credentials (Vercel will pull these from your Environment Variables)
-url = os.environ.get("SUPABASE_URL")
-key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY")
 
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
@@ -15,13 +10,18 @@ class handler(BaseHTTPRequestHandler):
         self.end_headers()
         
         try:
-            supabase = create_client(url, key)
-            # Querying the farmers table for the total count
-            response = supabase.table("farmers").select("*", count="exact").execute()
-            count = response.count if response.count else 4926 # Fallback if empty
+            from supabase import create_client
+            url = os.environ.get("SUPABASE_URL")
+            key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY")
             
-            data = {"count": count, "status": "SOVEREIGN"}
-            self.wfile.write(json.dumps(data).encode("utf-8"))
+            if not url or not key:
+                raise ValueError("MISSING_KEYS: Ensure SUPABASE_URL and KEY are in Vercel Settings")
+                
+            supabase = create_client(url, key)
+            response = supabase.table("farmers").select("*", count="exact").execute()
+            
+            self.wfile.write(json.dumps({"count": response.count}).encode("utf-8"))
         except Exception as e:
-            # If the DB fails, we still show the last known good state
+            # This will show up in your Vercel Logs
+            print(f"CRITICAL ERROR: {str(e)}")
             self.wfile.write(json.dumps({"count": 4926, "error": str(e)}).encode("utf-8"))
