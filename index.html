@@ -50,7 +50,19 @@
 .ledger th { border-bottom: 1px solid #333; padding: 10px; text-align: left; }
 .ledger td { padding: 10px; border-bottom: 1px solid #111; }
 </style>
-<div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+<div id="map-container" style="margin-top: 40px; padding: 20px; border: 1px solid #222; border-radius: 8px; background: rgba(0,0,0,0.3);">
+    <h3 style="color: #00ff88; font-family: 'Courier New', monospace; font-size: 0.9rem; margin-bottom: 20px;">CLUSTER DENSITY: ABIM DISTRICT</h3>
+    <svg viewBox="0 0 400 300" style="width: 100%; height: auto; stroke: #00ff88; stroke-width: 1; fill: none;">
+        <path id="cluster-north" d="M150 50 L250 50 L280 120 L120 120 Z" style="transition: fill 0.5s;" />
+        <path id="cluster-west" d="M120 120 L200 120 L180 220 L80 200 Z" style="transition: fill 0.5s;" />
+        <path id="cluster-east" d="M200 120 L280 120 L320 200 L220 220 Z" style="transition: fill 0.5s;" />
+        <path id="cluster-south" d="M180 220 L220 220 L200 280 Z" style="transition: fill 0.5s;" />
+        
+        <text x="175" y="90" fill="#00ff88" font-size="10" font-family="monospace">NORTH</text>
+        <text x="110" y="170" fill="#00ff88" font-size="10" font-family="monospace">ABIM_WEST</text>
+        <text x="240" y="170" fill="#00ff88" font-size="10" font-family="monospace">EAST</text>
+    </svg>
+</div><div style="max-width: 600px; margin: 0 auto; padding: 20px;">
     <table class="ledger">
         <thead>
             <tr><th>TIMESTAMP</th><th>CLUSTER</th><th>EVENT</th></tr>
@@ -60,3 +72,4 @@
         </tbody>
     </table>
 </div>
+
