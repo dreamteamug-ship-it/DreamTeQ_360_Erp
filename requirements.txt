@@ -1,4 +1,2 @@
 supabase
 httpx
-postgrest
-gotrue
