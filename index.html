@@ -144,6 +144,35 @@ function toggleManual() {
     const manual = document.getElementById('ops-manual');
     manual.style.right = manual.style.right === '0px' ? '-400px' : '0px';
 }
+</script><div id="alert-control" style="position: fixed; top: 10px; right: 10px; z-index: 10001;">
+    <button onclick="toggleRedAlert()" id="alert-btn" style="background: rgba(255,0,0,0.1); border: 1px solid #ff4444; color: #ff4444; padding: 5px 10px; cursor: pointer; font-family: monospace; font-size: 0.7rem;">[ ACTIVATE RED_ALERT ]</button>
+</div>
+
+<script>
+let alertActive = false;
+function toggleRedAlert() {
+    alertActive = !alertActive;
+    const btn = document.getElementById('alert-btn');
+    const ticker = document.getElementById('intelligence-ticker');
+    
+    if (alertActive) {
+        document.body.style.boxShadow = "inset 0 0 100px rgba(255,0,0,0.5)";
+        btn.style.background = "#ff4444";
+        btn.style.color = "#000";
+        btn.innerText = "[ DEACTIVATE RED_ALERT ]";
+        ticker.style.background = "#ff0000";
+        ticker.style.color = "#fff";
+        ticker.innerHTML = '<div style="display: inline-block; padding-left: 100%; animation: ticker 10s linear infinite;">!!! EMERGENCY ALERT: ABIM_WEST CLUSTER CRITICAL SHUTDOWN INITIATED !!! CONTACT FACILITY COMMAND IMMEDIATELY !!!</div>';
+    } else {
+        document.body.style.boxShadow = "none";
+        btn.style.background = "rgba(255,0,0,0.1)";
+        btn.style.color = "#ff4444";
+        btn.innerText = "[ ACTIVATE RED_ALERT ]";
+        ticker.style.background = "rgba(0, 20, 10, 0.9)";
+        ticker.style.color = "#00ff88";
+        location.reload(); // Reset to standard intelligence feed
+    }
+}
 </script></body>
 </html>
 <style>
@@ -202,6 +231,7 @@ function toggleManual() {
         </tbody>
     </table>
 </div>
+
 
 
 
