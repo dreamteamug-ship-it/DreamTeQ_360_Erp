@@ -23,7 +23,21 @@ function unlockVault() {
     if (key === 'Abim2026') { 
         document.getElementById('security-gate').style.display = 'none';
         localStorage.setItem('vault_session', 'active');
-        initSync(); // Start the dashboard engine only after login
+        initSync();     // --- Auto-Lock Watchdog ---
+    let inactivityTimer;
+    function resetTimer() {
+        clearTimeout(inactivityTimer);
+        // Lock after 10 minutes (600,000 milliseconds)
+        inactivityTimer = setTimeout(lockVault, 600000); 
+    }
+    function lockVault() {
+        localStorage.removeItem('vault_session');
+        location.reload();
+    }
+    // Listen for any user activity to reset the timer
+    window.onmousemove = resetTimer;
+    window.onkeypress = resetTimer;
+    resetTimer(); // Initialize timer on load // Start the dashboard engine only after login
     } else {
         document.getElementById('access-error').style.display = 'block';
         document.getElementById('vault-key').style.borderColor = '#ff4444';
@@ -138,6 +152,7 @@ window.onload = function() {
         </tbody>
     </table>
 </div>
+
 
 
 
