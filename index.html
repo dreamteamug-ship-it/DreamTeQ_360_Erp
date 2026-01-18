@@ -1,7 +1,31 @@
-﻿<html><body style="background:#050505;color:#d4af37;text-align:center;padding-top:100px;font-family:sans-serif;">
-    <h1>DREAMTEQ 360 ERP</h1>
-    <p style="color:white;">SOVEREIGN ENGINE: ONLINE</p>
-    <div style="font-size:100px;font-weight:bold;margin:20px;">4,926</div>
-    <p>VERIFIED FARMERS | ABIM WEST CLUSTER</p>
-    <script>console.log("Sovereign Gate Active");</script>
-</body></html>
+﻿<html>
+<head>
+    <title>DREAMTEQ 360 ERP</title>
+    <style>
+        body { background:#050505; color:#d4af37; text-align:center; padding-top:100px; font-family:sans-serif; }
+        .count { font-size:120px; font-weight:bold; margin:20px; transition: all 0.5s ease; }
+        .pulse { color: #00ff00; font-size: 14px; letter-spacing: 2px; animation: blink 2s infinite; }
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+    </style>
+</head>
+<body>
+    <h1 style="letter-spacing:5px;">DREAMTEQ 360 ERP</h1>
+    <p style="color:white;opacity:0.8;">SOVEREIGN ENGINE: ONLINE <span class="pulse">● LIVE SYNC</span></p>
+    <div id="farmerCount" class="count">4,926</div>
+    <p style="letter-spacing:3px;">VERIFIED FARMERS | ABIM WEST CLUSTER</p>
+
+    <script>
+        async function updatePulse() {
+            try {
+                const res = await fetch("/api/index");
+                const data = await res.json();
+                if (data.count) {
+                    document.getElementById("farmerCount").innerText = data.count.toLocaleString();
+                }
+            } catch (e) { console.log("Syncing with Abim West Cluster..."); }
+        }
+        setInterval(updatePulse, 10000); // Check for new farmers every 10 seconds
+        updatePulse();
+    </script>
+</body>
+</html>
