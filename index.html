@@ -112,6 +112,38 @@ function toggleManual() {
     const manual = document.getElementById('ops-manual');
     manual.style.right = manual.style.right === '0px' ? '-400px' : '0px';
 }
+</script><div id="intelligence-ticker" style="position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(0, 20, 10, 0.9); border-top: 1px solid #00ff88; color: #00ff88; padding: 5px 0; font-family: monospace; font-size: 0.75rem; z-index: 998; overflow: hidden; white-space: nowrap;">
+    <div style="display: inline-block; padding-left: 100%; animation: ticker 30s linear infinite;">
+        [ MARKET ALERT: MAIZE PRICES STABLE AT 1,200 UGX/KG ] --- [ CLUSTER STATUS: ABIM_WEST OPTIMIZED ] --- [ WEATHER: LIGHT RAIN EXPECTED IN ABIM DISTRICT ] --- [ VAULT SYNC: 100% INTEGRITY ] --- [ SYSTEM SOVEREIGNTY: ESTABLISHED ]
+    </div>
+</div>
+<style>
+@keyframes ticker {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(-100%, 0); }
+}
+</style><div id="ops-manual" style="position: fixed; top: 0; right: -400px; width: 350px; height: 100%; background: #0a0a0a; border-left: 1px solid #00ff88; z-index: 10000; padding: 30px; transition: right 0.5s ease; font-family: 'Courier New', monospace; box-shadow: -10px 0 30px rgba(0,0,0,0.5); overflow-y: auto;">
+    <button onclick="toggleManual()" style="background: transparent; border: 1px solid #ff4444; color: #ff4444; cursor: pointer; margin-bottom: 20px;">[ CLOSE MANUAL ]</button>
+    <h2 style="color: #00ff88; font-size: 1.2rem; border-bottom: 1px solid #222; padding-bottom: 10px;">OPERATIONS MANUAL v1.0</h2>
+    <section style="margin-top: 20px;">
+        <h4 style="color: #00ff88;">01. ENGINE STATUS</h4>
+        <p style="color: #888; font-size: 0.8rem;">The "Sovereign Engine" pulses every 30 seconds. A Green pulse indicates a successful handshake with the Abim West Cluster Vault.</p>
+    </section>
+    <section style="margin-top: 20px;">
+        <h4 style="color: #00ff88;">02. GIS MAPPING</h4>
+        <p style="color: #888; font-size: 0.8rem;">The Abim West Cluster represents the geographic boundary of the $14.9M facility. Fill density correlates with verified farmer registration data.</p>
+    </section>
+    <section style="margin-top: 20px;">
+        <h4 style="color: #00ff88;">03. SECURITY</h4>
+        <p style="color: #888; font-size: 0.8rem;">The system features a 10-minute "Dead Man Switch." Inactivity will trigger an automatic Vault Lock.</p>
+    </section>
+</div>
+<button id="manual-trigger" onclick="toggleManual()" style="position: fixed; bottom: 40px; right: 20px; background: rgba(0,255,136,0.1); border: 1px solid #00ff88; color: #00ff88; padding: 10px; cursor: pointer; z-index: 999; font-family: monospace;">[ ? HELP ]</button>
+<script>
+function toggleManual() {
+    const manual = document.getElementById('ops-manual');
+    manual.style.right = manual.style.right === '0px' ? '-400px' : '0px';
+}
 </script></body>
 </html>
 <style>
@@ -170,6 +202,7 @@ function toggleManual() {
         </tbody>
     </table>
 </div>
+
 
 
 
