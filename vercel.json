@@ -1,11 +1,10 @@
 {
   "version": 2,
   "functions": {
-    "api/*.py": { "runtime": "@vercel/python" }
+    "farmers.py": { "runtime": "@vercel/python" }
   },
   "rewrites": [
-    { "source": "/api/farmers", "destination": "/api/farmers.py" },
-    { "source": "/api/index", "destination": "/api/farmers.py" },
+    { "source": "/api/farmers", "destination": "/farmers.py" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
